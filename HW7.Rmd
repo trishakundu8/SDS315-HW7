@@ -101,6 +101,7 @@ nocall96mean = mean(gotv$voted1996[gotv$GOTV_call == 0])  # control
 vote1966boot = do(10000) * diffmean(voted1996 ~ GOTV_call, data = resample(gotv))
 confint(vote1966boot, level=0.95)
 ```
+## Voting in 1996
 Among individuals who received a GOTV call, 71.2% had voted in the 1996 election, compared to only 53.1% of those who did not receive a call. The difference in proportions, with a 95% confidence interval ranges from 0.124 to 0.237, indicating that this difference is statistically significant since 0 is not in the interval.
 We see that people who received calls were already more likely to vote since they voted in 1996, making voting in 1996 a confounding variable
 
@@ -113,7 +114,7 @@ confint(age_boot, level = 0.95)
 
 ggplot(gotv) + geom_boxplot(aes(x = factor(GOTV_call), y = AGE, fill = factor(GOTV_call))) + facet_wrap(~voted1998, labeller = labeller(voted1998 = c("0" = "Did Not Vote in 1998", "1" = "Voted in 1998"))) + labs(x = "GOTV Call (0 = No, 1 = Yes)", y = "Age", fill = "GOTV Call", title = "Age by GOTV Call and 1998 Voting")
 ```
-
+## Age
 The mean age of individuals who received a GOTV call is 58.3 years old, and 49.42 years old for people who did not receive a call.
 The bootstrapped 95% confidence level for the difference in means for the age of voters with vs. without a GOTV call is between 6.429 to 11.343. Since 0 is not in the confidence interval, the difference in means is significant, meaning age does factor into the data and is a confounding variable affecting the voting outcome.
 
@@ -127,8 +128,7 @@ major_boot = do(10000) * diffmean(MAJORPTY ~ GOTV_call, data = resample(gotv))
 confint(major_boot, level=0.95)
 
 ```
-
-
+## Voting for a major party
 Among those who received a GOTV call, 80.2% were registered with a major party, compared to 74.5% of those who didn’t. The 95% confidence interval for this difference is 0.00531 to 0.1059, meaning there is a significant association. Since major party members were both more likely to get a call and more likely to vote, MAJORPTY is a confounder that affects the estimate of the true effect of the GOTV call.
 
 
